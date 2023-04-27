@@ -43,9 +43,18 @@ public class MainActivity extends AppCompatActivity implements JsonTask.JsonTask
 
     @Override
     public void onPostExecute(String json) {
+
+        Log.d("MainActivity", json);
+
         Gson gson = new Gson();
-        Type type = new TypeToken<ArrayList<RecyclerViewItem>>() {}.getType();
-        ArrayList<RecyclerViewItem> listOfMountains = gson.fromJson(json, type);
+        Mountain[] mountains = gson.fromJson(json, Mountain[].class);
+
+
+        for (int i = 0; i < mountains.length; i++){
+
+                    Log.d("MainActivity ==>", "Hittade ett berg: " + mountains[i].getName());
+
+        }
     }
 
 

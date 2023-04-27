@@ -65,15 +65,5 @@ public class JsonTask extends AsyncTask<String, String, String> {
     @Override
     protected void onPostExecute(String json) {
         listener.onPostExecute(json);
-        Log.d("MainActivity", json);
-
-        Gson gson = new Gson();
-        Mountain[] mountains = gson.fromJson(json, Mountain[].class);
-
-
-        for (int i = 0; i < mountains.length; i++){
-            Log.d("MainActivity ==>", "Hittade ett berg: " + mountains[i].getName());
-        }
-
     }
 }
