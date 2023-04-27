@@ -1,6 +1,7 @@
 package com.example.networking;
 
 import android.os.AsyncTask;
+import android.util.Log;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -21,7 +22,7 @@ public class JsonTask extends AsyncTask<String, String, String> {
     private final JsonTaskListener listener;
 
     @SuppressWarnings("deprecation")
-    public JsonTask(JsonTaskListener listener) {
+    public JsonTask(JsonTaskListener listener, MainActivity mainActivity) {
         this.listener = listener;
     }
 
@@ -62,5 +63,6 @@ public class JsonTask extends AsyncTask<String, String, String> {
     @Override
     protected void onPostExecute(String json) {
         listener.onPostExecute(json);
+        Log.d("MainActivity", json);
     }
 }
