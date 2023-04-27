@@ -19,6 +19,7 @@ import java.util.Arrays;
 @SuppressWarnings("FieldCanBeLocal")
 public class MainActivity extends AppCompatActivity implements JsonTask.JsonTaskListener {
 
+    private Mountain[] mountains;
     private final String JSON_URL = "https://mobprog.webug.se/json-api?login=brom";
     private final String JSON_FILE = "mountains.json";
     ArrayList<RecyclerViewItem> items = new ArrayList<>(Arrays.asList(
@@ -33,7 +34,6 @@ public class MainActivity extends AppCompatActivity implements JsonTask.JsonTask
         setContentView(R.layout.activity_main);
 
        new JsonTask(this, this).execute(JSON_URL);
-
 
 
         RecyclerView recyclerView = findViewById(R.id.recycler_view);
