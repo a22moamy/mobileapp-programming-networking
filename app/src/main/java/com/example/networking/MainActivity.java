@@ -20,43 +20,39 @@ import java.util.Arrays;
 public class MainActivity extends AppCompatActivity implements JsonTask.JsonTaskListener {
 
     private Mountain[] mountains;
+    private  RecyclerViewAdapter adapter;
+    ArrayList<RecyclerViewItem> items = new ArrayList<>();
     private final String JSON_URL = "https://mobprog.webug.se/json-api?login=brom";
-    private final String JSON_FILE = "mountains.json";
-    ArrayList<RecyclerViewItem> items = new ArrayList<>(Arrays.asList(
-            new RecyclerViewItem("Matterhorn"),
-            new RecyclerViewItem("Mont Blanc"),
-            new RecyclerViewItem("Denali")
-    ));
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-       new JsonTask(this, this).execute(JSON_URL);
-
+        adapter = new RecyclerViewAdapter(this, items);
 
         RecyclerView recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(new RecyclerViewAdapter(getApplicationContext(), items));
+        recyclerView.setAdapter(adapter);
+
+
+        new JsonTask(this, this).execute(JSON_URL);
     }
 
     @Override
     public void onPostExecute(String json) {
 
         Log.d("MainActivity", json);
-
         Gson gson = new Gson();
         Mountain[] mountains = gson.fromJson(json, Mountain[].class);
 
-
-        for (int i = 0; i < mountains.length; i++){
-
-                    Log.d("MainActivity ==>", "Hittade ett berg: " + mountains[i].getName());
-
+        for (int i=0; i<mountains.length; i++) {
+            items.add(new RecyclerViewItem(mountains[i].toString()));
         }
+
+        adapter.notifyDataSetChanged();
+
     }
-
-
 
 }

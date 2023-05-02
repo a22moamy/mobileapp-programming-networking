@@ -13,10 +13,11 @@ import java.util.Arrays;
 public class RecyclerViewAdapter extends RecyclerView.Adapter<MyViewHolder> {
 
     Context context;
-
+    private LayoutInflater layoutInflater;
     public ArrayList<RecyclerViewItem> items;
 
     public RecyclerViewAdapter(Context context, ArrayList<RecyclerViewItem> items) {
+        this.layoutInflater = LayoutInflater.from(context);
         this.context = context;
         this.items = items;
     }
