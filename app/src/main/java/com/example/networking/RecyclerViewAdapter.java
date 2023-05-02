@@ -22,6 +22,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<MyViewHolder> {
         this.items = items;
     }
 
+
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -32,6 +33,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<MyViewHolder> {
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         holder.titleView.setText(items.get(position).getTitle());
     }
+
 
     @Override
     public int getItemCount() {
